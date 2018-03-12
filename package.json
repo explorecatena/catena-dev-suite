@@ -18,5 +18,8 @@
   ],
   "author": "Dylan <dylan@bitaccess.co>",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/bitaccess/catena-dev-suite#readme"
+  "homepage": "https://bitbucket.org/bitaccess/catena-dev-suite#readme",
+  "dependencies": {
+    "ganache": "github:explorecatena/ganache#browser"
+  }
 }
