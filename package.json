@@ -1,0 +1,22 @@
+{
+  "name": "catena-dev-suite",
+  "version": "0.0.1",
+  "description": "Catena Development Suite",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/bitaccess/catena-dev-suite.git"
+  },
+  "keywords": [
+    "catena",
+    "ethereum",
+    "development",
+    "suite"
+  ],
+  "author": "Dylan <dylan@bitaccess.co>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/bitaccess/catena-dev-suite#readme"
+}
