@@ -1,0 +1,24 @@
+{% set defaultNavLinks = [['/', 'Home'], ['/editor', 'Editor'], ['/explorer', 'Explorer'], ['/docs', 'Docs']] %}
+
+{% macro navbar(fluid = false, fixedTop = true, navLinks = defaultNavLinks) %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-white {{ 'fixed-top' if fixedTop else '' }}">
+    <div class="{{ 'container-fluid' if fluid else 'container' }}">
+      <a class="navbar-brand" href="/">
+        <img class="navbar-brand-icon" src="/img/catena-logo.svg" alt="Logo">
+        <span class="brand-text">
+          <div class="brand-maintext">Catena</div>
+          <div class="brand-subtext">Blockchain Development Suite</div>
+        </span>
+      </a>
+      <button type="button" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse">
+        <ul class="ml-auto navbar-nav">
+          {% for href, label in navLinks %}
+          <li class="nav-item"><a class="nav-link {{ 'active' if req.path == href else '' }}" href="{{ href }}">{{ label }}</a></li>
+          {% endfor %}
+          <li class="nav-item"><a href="{{ req.path }}?lng={{ nextLng }}" class="nav-link">{{ 'Français' if nextLng == 'fr' else 'English' }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endmacro %}

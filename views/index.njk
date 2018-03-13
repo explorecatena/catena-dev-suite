@@ -1,0 +1,32 @@
+{% extends 'partials/base.njk' %}
+
+{% macro homeTileLink(to, icon, header1, header2) %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <a href="{{ to }}" class="tile-link w-100 m-0">
+      <div class="w-100 p-2">
+        <div class="square {{ icon }}"></div>
+      </div>
+      <h1>{{ header1 }}</h1>
+      <h3>{{ header2 }}</h3>
+    </a>
+  </div>
+{% endmacro %}
+
+{% block content %}
+  {{ navbar(false, true) }}
+  <div class="container fullheight">
+    <div class="row align-items-center mt-2">
+      <div class="col-12">
+        <p>
+          The Catena Blockchain Development Suite provides all the necessary tools to develop blockchain applications (smart contracts) using the Ethereum platform. These tools include Ganache, a convenient interface to create a personal private blockchain; Truffle, a suite of command line tools for deploying and testing smart contracts; and Remix, an integrated development environment for writing and debugging smart contracts. Additionally, documentation for using all of these tools has been included.
+        </p>
+        <p>
+          Click on one of the components below to get started.
+        </p>
+      </div>
+      {{ homeTileLink('/editor', 'remix-logo', 'Remix IDE', 'Smart Contract Editor') }}
+      {{ homeTileLink('/explorer', 'ganache-logo', 'Ganache', 'Personal Blockchain Explorer') }}
+      {{ homeTileLink('/docs', 'book-icon', 'Documentation', 'Development Tool Reference') }}
+    </div>
+  </div>
+{% endblock %}

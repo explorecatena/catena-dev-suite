@@ -1,0 +1,9 @@
+{% extends 'partials/base.njk' %}
+
+{% block content %}
+  {{ navbar(false, true) }}
+  <div class="container fullheight">
+    <h1 class="display-1 pt-2">TODO</h1>
+    <h2>Path: {{ req.path | safe }}</h2>
+  </div>
+{% endblock %}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "NODE_ENV=development nodemon -w static -w views -w index.js index.js",
     "build": "npm-run-all build:*",
     "build:ganache": "cd lib/ganache && npm install && npm run compile:web && cd ../..",
     "build:remix": "cd lib/remix-ide && npm install && npm run build && cd ../.."
@@ -25,7 +25,8 @@
   "homepage": "https://bitbucket.org/bitaccess/catena-dev-suite#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "http-proxy-middleware": "^0.17.4"
+    "http-proxy-middleware": "^0.17.4",
+    "nunjucks": "^3.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.17.1",
