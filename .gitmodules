@@ -1,0 +1,8 @@
+[submodule "lib/ganache"]
+	path = lib/ganache
+	url = git@github.com:explorecatena/ganache.git
+	branch = catena
+[submodule "lib/remix-ide"]
+	path = lib/remix-ide
+	url = git@bitbucket.org:bitaccess/remix-ide.git
+	branch = catena
