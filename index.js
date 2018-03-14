@@ -59,7 +59,7 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
   },
   changeOrigin: true
 }))
-app.use('/web3', proxy({
+app.use(proxy('/web3', {
   target: web3ProviderUrl,
   ws: true,
   ignorePath: true,
