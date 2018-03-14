@@ -5,10 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "NODE_ENV=development nodemon -w static -w views -w index.js index.js",
-    "build": "npm-run-all build:*",
-    "build:ganache": "cd lib/ganache && npm install && npm run compile:web && cd ../..",
-    "build:remix": "cd lib/remix-ide && npm install && npm run build && cd ../.."
+    "dev": "cross-env NODE_ENV=development RUN_DEV=1 run-p -l dev:*",
+    "dev:main": "nodemon -i lib -e js index.js",
+    "dev:ganache": "cd lib/ganache && cross-env WEBPACK_PORT=8081 npm run dev:web",
+    "dev:remix": "cd lib/remix-ide && npm run watch",
+    "postinstall": "run-p -l install:*",
+    "install:ganache": "cd lib/ganache && npm install",
+    "install:remix": "cd lib/remix-ide && npm install",
+    "build": "run-p -l build:*",
+    "build:ganache": "cd lib/ganache && npm run compile:web",
+    "build:remix": "cd lib/remix-ide && npm run build"
   },
   "repository": {
     "type": "git",

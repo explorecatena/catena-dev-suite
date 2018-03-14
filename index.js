@@ -5,23 +5,25 @@ const proxy = require('http-proxy-middleware')
 const { fork } = require('child_process')
 const nunjucks = require('nunjucks')
 
-const isDev = process.env.NODE_ENV === 'development'
-const PORT = process.env.PORT || 8080
-const GANACHE_PORT = PORT + 1
-
 const libDir = path.resolve(__dirname, 'lib')
 
-const ganacheProcess = fork(path.join(libDir, 'ganache/dist/web/main/index.js'), {
-  env: { PORT: GANACHE_PORT },
-  stdio: 'inherit'
-})
+const isDev = process.env.NODE_ENV === 'development'
+const PORT = process.env.PORT || 8080
+let GANACHE_SERVER_PORT = PORT + 1
 
-ganacheProcess.on('error', (e) => {
-  console.error('ganache process error:', e)
-  process.exit(1)
-})
+if (!process.env.RUN_DEV) {
+  const ganacheProcess = fork(path.join(libDir, 'ganache/dist/web/main/index.js'), {
+    env: { PORT: GANACHE_SERVER_PORT },
+    stdio: 'inherit'
+  })
 
-const ganacheUrl = `http://localhost:${GANACHE_PORT}`
+  ganacheProcess.on('error', (e) => {
+    console.error('ganache process error:', e)
+    process.exit(1)
+  })
+}
+
+const ganacheUrl = `http://localhost:${GANACHE_SERVER_PORT}`
 
 const app = express()
 
@@ -50,7 +52,8 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
   ws: true,
   pathRewrite: {
     '^/ganache$': '/'
-  }
+  },
+  changeOrigin: true
 }))
 
 app.get('/explorer', (req, res) => res.render('iframed.njk', { iframeSrc: '/ganache' }))
