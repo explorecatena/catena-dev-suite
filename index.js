@@ -6,6 +6,8 @@ const { fork } = require('child_process')
 const nunjucks = require('nunjucks')
 
 const libDir = path.resolve(__dirname, 'lib')
+const nodeModulesDir = path.resolve(__dirname, 'node_modules')
+const staticDir = path.resolve(__dirname, 'static')
 
 const isDev = process.env.NODE_ENV === 'development'
 const PORT = process.env.PORT || 8080
@@ -24,6 +26,7 @@ if (!process.env.RUN_DEV) {
 }
 
 const ganacheUrl = `http://localhost:${GANACHE_SERVER_PORT}`
+const web3ProviderUrl = 'http://localhost:7545'
 
 const app = express()
 
@@ -43,8 +46,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/static', express.static(path.resolve(__dirname, 'static')))
-app.use('/img', express.static(path.resolve(__dirname, 'static/img')))
+app.use('/static', express.static(staticDir))
+app.use('/img', express.static(path.join(staticDir, 'img')))
+app.use('/static/vendor/web3', express.static(path.join(nodeModulesDir, 'web3/dist')))
 
 app.use('/remix', express.static(path.join(libDir, 'remix-ide')))
 app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
@@ -53,6 +57,12 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
   pathRewrite: {
     '^/ganache$': '/'
   },
+  changeOrigin: true
+}))
+app.use('/web3', proxy({
+  target: web3ProviderUrl,
+  ws: true,
+  ignorePath: true,
   changeOrigin: true
 }))
 

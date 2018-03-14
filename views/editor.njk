@@ -4,3 +4,13 @@
   {{ navbar(true, true) }}
   <iframe id="remix" src="{{ iframeSrc }}" frameborder="0" class="fullscreen" height="100%" width="100%"></iframe>
 {% endblock %}
+
+{% block scripts %}
+  <script src="static/vendor/web3/web3.min.js"></script>
+  <script>
+    (function() {
+      var iframe = document.getElementById('remix').contentWindow;
+      iframe.web3 = new Web3(new Web3.providers.HttpProvider(window.location.origin + '/web3'));
+    })();
+  </script>
+{% endblock %}
