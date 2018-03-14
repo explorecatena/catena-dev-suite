@@ -32,7 +32,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "http-proxy-middleware": "^0.17.4",
-    "nunjucks": "^3.1.2"
+    "nunjucks": "^3.1.2",
+    "web3": "^0.20.6"
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
