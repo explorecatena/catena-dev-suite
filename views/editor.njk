@@ -1,0 +1,6 @@
+{% extends 'partials/base.njk' %}
+
+{% block content %}
+  {{ navbar(true, true) }}
+  <iframe id="remix" src="{{ iframeSrc }}" frameborder="0" class="fullscreen" height="100%" width="100%"></iframe>
+{% endblock %}

@@ -56,8 +56,8 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
   changeOrigin: true
 }))
 
-app.get('/explorer', (req, res) => res.render('iframed.njk', { iframeSrc: '/ganache' }))
-app.get('/editor', (req, res) => res.render('iframed.njk', { iframeSrc: '/remix' }))
+app.get('/explorer', (req, res) => res.render('explorer.njk', { iframeSrc: '/ganache' }))
+app.get('/editor', (req, res) => res.render('editor.njk', { iframeSrc: '/remix' }))
 app.get('/docs', (req, res) => res.render('docs.njk'))
 app.get('/', (req, res) => res.render('index.njk'))
 
