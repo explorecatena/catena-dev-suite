@@ -11,7 +11,7 @@ const staticDir = path.resolve(__dirname, 'static')
 
 const isDev = process.env.NODE_ENV === 'development'
 const PORT = process.env.PORT || 8080
-let GANACHE_SERVER_PORT = PORT + 1
+let GANACHE_SERVER_PORT = Number.parseInt(PORT) + 1
 
 if (!process.env.RUN_DEV) {
   const ganacheProcess = fork(path.join(libDir, 'ganache/dist/web/main/index.js'), {
