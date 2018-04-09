@@ -31,10 +31,8 @@
   "homepage": "https://bitbucket.org/bitaccess/catena-dev-suite#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "ganache": "file:lib/ganache",
     "http-proxy-middleware": "^0.17.4",
     "nunjucks": "^3.1.2",
-    "remix-ide": "file:lib/remix-ide",
     "web3": "^0.20.6"
   },
   "devDependencies": {
