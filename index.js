@@ -30,7 +30,7 @@ const web3ProviderUrl = 'http://localhost:7545'
 
 const app = express()
 
-nunjucks.configure('views', {
+nunjucks.configure(path.join(__dirname, 'views'), {
   autoescape: true,
   express: app,
   watch: isDev,
