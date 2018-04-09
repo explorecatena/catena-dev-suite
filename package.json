@@ -9,6 +9,7 @@
     "dev:main": "nodemon -i lib -e js index.js",
     "dev:ganache": "cd lib/ganache && cross-env WEBPACK_PORT=8081 npm run dev:web",
     "dev:remix": "cd lib/remix-ide && npm run watch",
+    "postinstall": "run-p -l install:*",
     "install:ganache": "cd lib/ganache && npm install",
     "install:remix": "cd lib/remix-ide && npm install",
     "build": "run-p -l build:*",
