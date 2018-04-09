@@ -1,9 +1,10 @@
 {% extends 'partials/base.njk' %}
 
+{% set pdfPath = 'static/docs.pdf' %}
+
 {% block content %}
-  {{ navbar(false, true) }}
-  <div class="container fullheight">
-    <h1 class="display-1 pt-2">TODO</h1>
-    <h2>Path: {{ req.path | safe }}</h2>
-  </div>
+  {{ navbar(true, true) }}
+  <object data="{{pdfPath}}" type="application/pdf" class="fullscreen">
+    <embed src="{{pdfPath}}" type="application/pdf" />
+  </object>
 {% endblock %}
