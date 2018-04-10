@@ -62,8 +62,7 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
 app.use(proxy('/web3', {
   target: web3ProviderUrl,
   ws: true,
-  ignorePath: true,
-  changeOrigin: true
+  ignorePath: true
 }))
 
 app.get('/explorer', (req, res) => res.render('explorer.njk', { iframeSrc: '/ganache' }))
