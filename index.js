@@ -28,6 +28,12 @@ if (!process.env.RUN_DEV) {
 const ganacheUrl = `http://localhost:${GANACHE_SERVER_PORT}`
 const web3ProviderUrl = 'http://localhost:7545'
 
+const web3Proxy = proxy('/web3', {
+  target: web3ProviderUrl,
+  ws: true,
+  ignorePath: true
+})
+
 const app = express()
 
 nunjucks.configure(path.join(__dirname, 'views'), {
@@ -59,11 +65,7 @@ app.use(['/ganache', '/ganache.*.js', '/assets*', '/wss'], proxy({
   },
   changeOrigin: true
 }))
-app.use(proxy('/web3', {
-  target: web3ProviderUrl,
-  ws: true,
-  ignorePath: true
-}))
+app.use(web3Proxy)
 
 app.get('/explorer', (req, res) => res.render('explorer.njk', { iframeSrc: '/ganache' }))
 app.get('/editor', (req, res) => res.render('editor.njk', { iframeSrc: '/remix' }))
@@ -73,3 +75,4 @@ app.get('/', (req, res) => res.render('index.njk'))
 const server = http.createServer(app)
 
 server.listen(PORT, () => console.log('Server listening on %d', server.address().port))
+server.on('upgrade', web3Proxy.upgrade)
